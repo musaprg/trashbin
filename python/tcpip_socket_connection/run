@@ -1,0 +1,10 @@
+#!/bin/sh
+
+echo "[+] Run server..."
+python server.py &
+
+sleep 3
+
+echo "[+] Run client..."
+python client.py
+
