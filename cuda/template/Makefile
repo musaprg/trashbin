@@ -242,7 +242,7 @@ ALL_LDFLAGS += $(addprefix -Xlinker ,$(LDFLAGS))
 ALL_LDFLAGS += $(addprefix -Xlinker ,$(EXTRA_LDFLAGS))
 
 # Common includes and paths for CUDA
-INCLUDES  := -I../../common/inc
+INCLUDES  := -I./inc
 LIBRARIES :=
 
 ################################################################################
@@ -275,7 +275,7 @@ endif
 # Target rules
 all: build
 
-build: template
+build: tutorial
 
 check.deps:
 ifeq ($(SAMPLE_ENABLED),0)
@@ -284,22 +284,22 @@ else
 	@echo "Sample is ready - all dependencies have been met"
 endif
 
-template.o:template.cu
+tutorial.o:tutorial.cu
 	$(EXEC) $(NVCC) $(INCLUDES) $(ALL_CCFLAGS) $(GENCODE_FLAGS) -o $@ -c $<
 
-template_cpu.o:template_cpu.cpp
+tutorial_cpu.o:tutorial_cpu.cpp
 	$(EXEC) $(NVCC) $(INCLUDES) $(ALL_CCFLAGS) $(GENCODE_FLAGS) -o $@ -c $<
 
-template: template.o template_cpu.o
+tutorial: tutorial.o tutorial_cpu.o
 	$(EXEC) $(NVCC) $(ALL_LDFLAGS) $(GENCODE_FLAGS) -o $@ $+ $(LIBRARIES)
-	$(EXEC) mkdir -p ../../bin/$(TARGET_ARCH)/$(TARGET_OS)/$(BUILD_TYPE)
-	$(EXEC) cp $@ ../../bin/$(TARGET_ARCH)/$(TARGET_OS)/$(BUILD_TYPE)
+	$(EXEC) mkdir -p ./bin
+	$(EXEC) mv $@ ./bin
 
 run: build
-	$(EXEC) ./template
+	$(EXEC) ./bin/tutorial
 
 clean:
-	rm -f template template.o template_cpu.o
-	rm -rf ../../bin/$(TARGET_ARCH)/$(TARGET_OS)/$(BUILD_TYPE)/template
+	rm -f tutorial tutorial.o tutorial_cpu.o
+	rm -rf ./bin
 
 clobber: clean
