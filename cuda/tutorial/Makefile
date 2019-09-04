@@ -292,11 +292,14 @@ tutorial_cpu.o:tutorial_cpu.cpp
 
 tutorial: tutorial.o tutorial_cpu.o
 	$(EXEC) $(NVCC) $(ALL_LDFLAGS) $(GENCODE_FLAGS) -o $@ $+ $(LIBRARIES)
+	$(EXEC) mkdir -p ./bin
+	$(EXEC) mv $@ ./bin
 
 run: build
-	$(EXEC) ./tutorial
+	$(EXEC) ./bin/tutorial
 
 clean:
 	rm -f tutorial tutorial.o tutorial_cpu.o
+	rm -rf ./bin
 
 clobber: clean
