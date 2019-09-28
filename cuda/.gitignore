@@ -1,6 +1,7 @@
+build/
 
-# Created by https://www.gitignore.io/api/c,cuda
-# Edit at https://www.gitignore.io/?templates=c,cuda
+# Created by https://www.gitignore.io/api/c,c++,cuda,cmake
+# Edit at https://www.gitignore.io/?templates=c,c++,cuda,cmake
 
 ### C ###
 # Prerequisites
@@ -56,6 +57,42 @@ Module.symvers
 Mkfile.old
 dkms.conf
 
+### C++ ###
+# Prerequisites
+
+# Compiled Object files
+*.slo
+
+# Precompiled Headers
+
+# Compiled Dynamic libraries
+
+# Fortran module files
+*.mod
+*.smod
+
+# Compiled Static libraries
+*.lai
+
+# Executables
+
+### CMake ###
+CMakeLists.txt.user
+CMakeCache.txt
+CMakeFiles
+CMakeScripts
+Testing
+Makefile
+cmake_install.cmake
+install_manifest.txt
+compile_commands.json
+CTestTestfile.cmake
+_deps
+
+### CMake Patch ###
+# External projects
+*-prefix/
+
 ### CUDA ###
 *.i
 *.ii
@@ -64,4 +101,4 @@ dkms.conf
 *.cubin
 *.fatbin
 
-# End of https://www.gitignore.io/api/c,cuda
+# End of https://www.gitignore.io/api/c,c++,cuda,cmake
