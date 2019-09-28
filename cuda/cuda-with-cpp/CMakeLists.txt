@@ -9,7 +9,7 @@ set(HEADERS
     # main.h
 )
 
-add_executable(Main
+add_executable(main
     ${SOURCES}
     ${HEADERS}
 )
