@@ -23,4 +23,4 @@ if(CUDA_FOUND)
     )
 endif()
 
-target_link_libraries(Main Example)
+target_link_libraries(main Example)
