@@ -1,0 +1,24 @@
+version: "3"
+
+services:
+  app:
+    build:
+      context: ./app
+    network:
+      - internal
+  envoy:
+    image: envoy:1.11.2
+    command: envoy -c "/config.yaml"
+    ports:
+      - "9901:9901"
+      - "51051:51051"
+    volumes:
+      - ./envoy/config.yaml:/config.yaml
+      - ./protobuf:/protobuf
+    depends_on:
+      - app
+    network:
+      - internal
+
+networks:
+  internal:
