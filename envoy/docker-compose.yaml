@@ -4,20 +4,20 @@ services:
   app:
     build:
       context: ./app
-    network:
+    networks:
       - internal
   envoy:
-    image: envoy:1.11.2
+    image: envoyproxy/envoy:v1.11.2
     command: envoy -c "/config.yaml"
     ports:
       - "9901:9901"
       - "51051:51051"
     volumes:
       - ./envoy/config.yaml:/config.yaml
-      - ./protobuf:/protobuf
+      - ./app/proto:/proto
     depends_on:
       - app
-    network:
+    networks:
       - internal
 
 networks:
