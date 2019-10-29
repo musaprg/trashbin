@@ -22,10 +22,8 @@
 package main
 
 import (
-	"context"
 	"log"
 	"net"
-    "strings"
 
 	"google.golang.org/grpc"
 	pb "helloworld"
@@ -41,9 +39,19 @@ type server struct {
 }
 
 // SayHello implements helloworld.GreeterServer
-func (s *server) SayHello(ctx context.Context, in *pb.HelloRequest) (*pb.HelloReply, error) {
-	log.Printf("Received: %v", in.GetLength())
-	return &pb.HelloReply{Message: strings.Repeat("a", int(in.GetLength()))}, nil
+func (s *server) SayHello(in *pb.HelloRequest, stream pb.Greeter_SayHelloServer) error {
+	log.Printf("Received: %v will send %v times.", in.GetName(), in.GetTimes())
+
+	res := &pb.HelloReply{Message: in.GetName()}
+	times := int(in.GetTimes())
+
+	for i := 0; i < times; i++ {
+		if err := stream.Send(res); err != nil {
+			return err
+		}
+	}
+
+	return nil
 }
 
 func main() {
