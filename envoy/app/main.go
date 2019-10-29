@@ -24,6 +24,7 @@ package main
 import (
 	"log"
 	"net"
+    "strings"
 
 	"google.golang.org/grpc"
 	pb "helloworld"
@@ -40,9 +41,9 @@ type server struct {
 
 // SayHello implements helloworld.GreeterServer
 func (s *server) SayHello(in *pb.HelloRequest, stream pb.Greeter_SayHelloServer) error {
-	log.Printf("Received: %v will send %v times.", in.GetName(), in.GetTimes())
+	log.Printf("Received: %v bytes' string will send %v times.", in.GetLength(), in.GetTimes())
 
-	res := &pb.HelloReply{Message: in.GetName()}
+	res := &pb.HelloReply{Message: strings.Repeat("a", int(in.GetLength()))}
 	times := int(in.GetTimes())
 
 	for i := 0; i < times; i++ {
