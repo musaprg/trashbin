@@ -28,11 +28,19 @@ service Greeter {
 
 // The request message containing the user's name.
 message HelloRequest {
-  int32 length = 1;
-  int32 times = 2;
+  int32 times = 1;
+}
+
+message HelloDetail {
+    string hoge = 1;
+    string fuga = 2;
+    string piyo = 3;
 }
 
 // The response message containing the greetings
 message HelloReply {
-  string message = 1;
+  string id = 1;
+  string from = 2;
+  string body = 3;
+  repeated HelloDetail details = 4;
 }
