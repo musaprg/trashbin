@@ -1,0 +1,20 @@
+{
+  "dependencies": {
+    "next": "^9.1.4",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0"
+  },
+  "devDependencies": {
+    "@types/node": "^12.12.15",
+    "@types/react": "^16.9.16",
+    "typescript": "^3.7.3"
+  },
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "start": "next start"
+  },
+  "name": "next-ts",
+  "version": "1.0.0",
+  "license": "MIT"
+}
