@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8)
-project(CudaWithCpp)
+project(CudaWithCpp CUDA CXX)
 
 set(SOURCES
     main.cc
@@ -15,12 +15,10 @@ add_executable(main
 )
 
 find_package(CUDA REQUIRED)
-if(CUDA_FOUND)
-    message("CUDA version: " ${CUDA_VERSION})
-    CUDA_ADD_LIBRARY(Example STATIC
-        example.h
-        example.cu
-    )
-endif()
+add_library(Example
+example.h
+example.cu
+)
+target_link_libraries(Example PUBLIC ${CUDA_LIBRARIES})
 
 target_link_libraries(main Example)
