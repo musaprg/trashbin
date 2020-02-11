@@ -1,0 +1,3 @@
+[submodule "quantum-computing/blueqat-tutorial/upstream/blueqat-tutorials"]
+	path = quantum-computing/blueqat-tutorial/upstream/blueqat-tutorials
+	url = https://github.com/Blueqat/Blueqat-tutorials.git
